@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="weather__header">
+            <form class="weather__search" action="/" method="POST">
+                <input type="text" name="city" placeholder="Search for a city..." class="weather__searchform" required>
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </form>
+            <button id="locationButton" class="location__button">Use My Location</button>
+            <div class="weather__units">
+                <span class="weather_unit_celsius">&#176C</span>
+                <span class="weather_unit_fahrenheit">&#176F</span>
+            </div>
+        </div>
+        <% if (weather) { %>
+        <div class="weather__body">
+            <h1 class="weather__city"><%= weather.city %></h1>
+            <div class="weather__datetime">
+                <p><span id="currentDate"></span>, <span id="currentTime"></span></p>
+                <p>Sunrise: <%= weather.sunriseTime %>, Sunset: <%= weather.sunsetTime %></p>
+            </div>
+            <div class="weather__forecast">
+                <%= weather.description %>
+            </div>
+            <div class="weather__icon">
+                <img src="<%= weather.weatherIcon %>" alt="Weather Icon">
+            </div>
+            <p class="weather__temperature">
+                Temperature: <%= weather.temperature %>°C
+            </p>
+            <div class="weather__minmax">
+                <p>Min: <%= weather.minTemperature %>&#176</p>
+                <p>Max: <%= weather.maxTemperature %>&#176</p>
+            </div>
+        </div>
+
+        <div class="weather__info">
+            <div class="weather__card">
+                <i class="fa-solid fa-temperature-full"></i>
+                <div>
+                    <p>Real Feel</p>
+                    <p class="weather__realfeel"><%= weather.feelsLike %>°</p>
+                </div>
+            </div>
+            <div class="weather__card">
+                <i class="fa-solid fa-droplet"></i>
+                <div>
+                    <p>Humidity</p>
+                    <p class="weather__humidity"><%= weather.humidity %>%</p>
+                </div>
+            </div>
+            <div class="weather__card">
+                <i class="fa-solid fa-wind"></i>
+                <div>
+                    <p>Wind</p>
+                    <p class="weather__wind"><%= weather.windSpeed %>m/s</p>
+                </div>
+            </div>
+            <div class="weather__card">
+                <i class="fa-solid fa-gauge-high"></i>
+                <div>
+                    <p>Pressure</p>
+                    <p class="weather__pressure"><%= weather.pressure %>hPa</p>
+                </div>
+            </div>
+        </div>
+        <% } else { %>
+        <div class="weather__body">
+            <p class="weather__error"><%= error %></p>
+        </div>
+        <% } %>
+    </div>
+    <script src="https://kit.fontawesome.com/a692e1c39f.js" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+</html>
